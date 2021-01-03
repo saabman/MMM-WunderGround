@@ -1,7 +1,7 @@
 # Module: Weather Underground Forecast
 
-This fork is an attempt to rework Weather Underground to work with the new API -
-This is strictly experimental and does not work correctly
+# This fork is an attempt to rework Weather Underground to work with the new API -
+# This is strictly experimental and does not work correctly
 
 This is a module for MagicMirror, modified version of the default `weatherforecast` module. 
 
