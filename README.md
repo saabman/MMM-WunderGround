@@ -1,4 +1,8 @@
 # Module: Weather Underground Forecast
+
+This fork is an attempt to rework Weather Underground to work with the new API -
+This is strictly experimental and does not work correctly
+
 This is a module for MagicMirror, modified version of the default `weatherforecast` module. 
 
 This is similar to the default `weatherforecast` module, however it has additional functionality (such as displaying the probability of precipitation for each day). It also retrieves its data from Weather Underground instead of OpenWeatherMap.
