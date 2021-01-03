@@ -29,7 +29,7 @@ modules: [
 	layout: "horizontal",
 	sysstat: 0
     }
-};
+},
 ]
 ````
 
