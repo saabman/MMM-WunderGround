@@ -22,7 +22,7 @@ modules: [
     position: 'top_right',
     config: {
         apikey: 'xxxxxxxxxxxxx', // private; don't share!
-        pws: 'pws:IGELDERL219', //culemborg
+        pws: 'IGELDERL219', //culemborg
         hourly: '1',
         fctext: '1',
         fcdaycount: "5",
@@ -36,7 +36,7 @@ modules: [
 	layout: "horizontal",
 	sysstat: 0
     }
-};
+},
 ]
 ````
 
