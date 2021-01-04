@@ -287,6 +287,10 @@ Module.register("MMM-WunderGround", {
 
             wrapper.appendChild(small);
             wrapper.appendChild(large);
+            
+            var rainfall = document.createElement("span");
+            rainfall.className = "bright";
+            rainfall.innerHTML = " " + this.rainfall + "&mm;";
 
         }
 
@@ -947,7 +951,7 @@ Module.register("MMM-WunderGround", {
  //           this.windSpeed = "wi-wind-beaufort-" + this.ms2Beaufort(data.current_observation.wind_kph);
             this.windSpeedKph = data.observations[0]["metric"].windSpeed;
 //            this.moonPhaseIcon = "<img class='moonPhaseIcon' src='https://www.wunderground.com/graphics/moonpictsnew/moon" + data.moon_phase.ageOfMoon + ".gif'>";
-
+			this.rainfall = data.observations[0]["metric"].precipTotal;
 
             if (this.config.units == "metric") {
                 this.temperature = data.observations[0]["metric"].temp;
