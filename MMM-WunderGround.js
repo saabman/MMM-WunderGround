@@ -227,7 +227,7 @@ Module.register("MMM-WunderGround", {
 
             var windIcon = document.createElement("td");
             if (this.config.windunits == "mph") {
-                windIcon.innerHTML = this.windSpeedMph + "<sub>mph</sub>";
+                windIcon.innerHTML = this.windSpeedKph + "<sub>Kph</sub>";
             } else {
                 windIcon.className = "wi " + this.windSpeed;
             }
@@ -944,7 +944,7 @@ Module.register("MMM-WunderGround", {
             this.Humidity = data.observations[0].humidity;
   //          this.Humidity = this.Humidity.substring(0, this.Humidity.length - 1);
  //           this.windSpeed = "wi-wind-beaufort-" + this.ms2Beaufort(data.current_observation.wind_kph);
-            this.windSpeedMph = data.observations[0]["metric"].windspeed;
+            this.windSpeedKph = data.observations[0]["metric"].windSpeed;
 //            this.moonPhaseIcon = "<img class='moonPhaseIcon' src='https://www.wunderground.com/graphics/moonpictsnew/moon" + data.moon_phase.ageOfMoon + ".gif'>";
 
 
