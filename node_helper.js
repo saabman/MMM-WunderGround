@@ -116,7 +116,10 @@ module.exports = NodeHelper.create({
         console.log(Wurl);
 		if ( this.config.debug === 1 ) {
 			console.log(moment().format() + " 4 " + this.name  + ": " + Wurl);
+			
+			
 		}
+//		Requests Current weather		
         request({
             url: Wurl,
             method: 'GET'
@@ -136,9 +139,54 @@ module.exports = NodeHelper.create({
 
                 }
         );
+        },
+// 		
         
+fetchForecast: function() {
+//	https://api.weather.com/v3/wx/forecast/daily/5day?geocode=33.74,-84.39&format=json&units=e&language=en-US&apiKey=yourApiKey
+        var self = this;
+        this.fetcherRunning = true; 
         
+        var params = "geocode="; 
+        var wulang = this.config.lang.toUpperCase();
+        if (wulang == "DE") {
+            wulang = "DL";
+        }
 
+        params += this.config.lat + "," + this.config.lon;
+        params += "&format=json&units=m";
+//        params += this.config.units;
+		params += "&language=en-US";
+        params += "&apiKey=";
+        params += this.config.apikey;
+        
+        var Furl = this.config.apiBaseForecast + params;
+        console.log(Furl);
+		if ( this.config.debug === 1 ) {
+			console.log(moment().format() + " 4 " + this.name  + ": " + Furl);
+			
+			
+		}
+//		Requests Forecast		
+        request({
+            url: Furl,
+            method: 'GET'
+                }, function(error, response, body) {
+
+                    if (!error && response.statusCode == 200) {
+                        this.wunderPayload = body;
+                        // console.log(moment().format() + " 5 " + self.name + ": " + body);
+                        self.sendSocketNotification('FORECAST',body);
+                    } else {
+                        console.log(moment().format() + " 6 " + self.name + ": " + error);
+                    }
+                        
+                    setTimeout(function() {
+                        self.fetchForecast();
+                    }, self.config.updateInterval);
+
+                }
+        );
 
   },
   
@@ -152,7 +200,7 @@ module.exports = NodeHelper.create({
             
         this.config = payload;
         if ( this.config.debug === 1 ) {
-			console.log('Lets get WunderGround');
+			console.log('Lets get WunderGround requested!!!!!');
 		}
 
         if (!this.fetcherRunning) {
@@ -193,7 +241,9 @@ module.exports = NodeHelper.create({
         
         }			
     }
-    
+    if (notification === 'GET_FORECAST') {
+    	this.fetchForecast();
+    }
     if (notification === 'GET_WIFI') {
       this.getWifi();
     }

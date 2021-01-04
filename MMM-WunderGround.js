@@ -45,7 +45,7 @@ Module.register("MMM-WunderGround", {
         retryDelay: 2500,
 
         apiBase: "https://api.weather.com/v2/pws/observations/",
-        apiBaseforecast: "https://api.weather.com/v3/wx/forecast/daily/5day?", //geocode=33.74,-84.39&format=json&units=e&language=en-US&apiKey=yourApiKey
+        apiBaseForecast: "https://api.weather.com/v3/wx/forecast/daily/5day?", //geocode=33.74,-84.39&format=json&units=e&language=en-US&apiKey=yourApiKey
         
         
 
@@ -155,6 +155,7 @@ Module.register("MMM-WunderGround", {
         this.error = false;
         this.errorDescription = "";
         this.getWunder();
+        this.getForecast();
         this.updateTimer = null;
         this.systemp = "";
         this.wifiap = "";
@@ -176,6 +177,14 @@ Module.register("MMM-WunderGround", {
 		}
         //this.sendSocketNotification("GET_WUNDERGROUND", this.config);
 		this.sendSocketNotification(this.config.socknot, this.config);
+    },
+    
+    getForecast: function() {
+    	if ( this.config.debug === 1 ) {
+			Log.info("WunderGround: Getting Forecast.");
+		}
+        //this.sendSocketNotification("GET_WUNDERGROUND", this.config);
+		this.sendSocketNotification("GET_FORECAST", this.config);
     },
 
     // Override dom generator.
@@ -252,6 +261,14 @@ Module.register("MMM-WunderGround", {
             HumidityTxt.innerHTML = this.Humidity + "&nbsp;";
             HumidityTxt.className = "vcen left";
             row_sitrep.appendChild(HumidityTxt);
+  
+            var RainIcon = document.createElement("td");
+            RainIcon.className = "wi wi-umbrella";
+            row_sitrep.appendChild(RainIcon);
+                        
+            var rainfall = document.createElement("td");
+            rainfall.innerHTML = " " + this.rainfall + "mm";
+            row_sitrep.appendChild(rainfall);
 
             var sunriseSunsetIcon = document.createElement("td");
             sunriseSunsetIcon.className = "wi " + this.sunriseSunsetIcon;
@@ -264,7 +281,7 @@ Module.register("MMM-WunderGround", {
 
             var moonPhaseIcon = document.createElement("td");
             moonPhaseIcon.innerHTML = this.moonPhaseIcon;
-            row_sitrep.appendChild(moonPhaseIcon);
+//            row_sitrep.appendChild(moonPhaseIcon);
 
             table_sitrep.appendChild(row_sitrep);
             small.appendChild(table_sitrep);
@@ -288,9 +305,8 @@ Module.register("MMM-WunderGround", {
             wrapper.appendChild(small);
             wrapper.appendChild(large);
             
-            var rainfall = document.createElement("span");
-            rainfall.className = "bright";
-            rainfall.innerHTML = " " + this.rainfall + "&mm;";
+
+
 
         }
 
@@ -952,6 +968,7 @@ Module.register("MMM-WunderGround", {
             this.windSpeedKph = data.observations[0]["metric"].windSpeed;
 //            this.moonPhaseIcon = "<img class='moonPhaseIcon' src='https://www.wunderground.com/graphics/moonpictsnew/moon" + data.moon_phase.ageOfMoon + ".gif'>";
 			this.rainfall = data.observations[0]["metric"].precipTotal;
+			console.log (this.rainfall);
 
             if (this.config.units == "metric") {
                 this.temperature = data.observations[0]["metric"].temp;
@@ -1255,6 +1272,14 @@ Module.register("MMM-WunderGround", {
 			}
             self.processWeather(JSON.parse(payload));
         }
+		
+        if (notification === 'FORECAST') {
+            if ( this.config.debug === 1 ) {
+				Log.info('received FORECAST');
+				Log.info(payload);
+			}
+            //self.processWeather(JSON.parse(payload));
+        }		
 
     }
 
