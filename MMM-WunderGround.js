@@ -45,7 +45,7 @@ Module.register("MMM-WunderGround", {
         retryDelay: 2500,
 
         apiBase: "https://api.weather.com/v2/pws/observations/",
-        apiBaseforecast: "https://api.weather.com/v3/wx/forecast/daily/5day?" //geocode=33.74,-84.39&format=json&units=e&language=en-US&apiKey=yourApiKey
+        apiBaseforecast: "https://api.weather.com/v3/wx/forecast/daily/5day?", //geocode=33.74,-84.39&format=json&units=e&language=en-US&apiKey=yourApiKey
         
         
 
