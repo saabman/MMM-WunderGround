@@ -45,6 +45,7 @@ Module.register("MMM-WunderGround", {
         retryDelay: 2500,
 
         apiBase: "https://api.weather.com/v2/pws/observations/",
+        apiBaseforecast: "https://api.weather.com/v3/wx/forecast/daily/5day?" //geocode=33.74,-84.39&format=json&units=e&language=en-US&apiKey=yourApiKey
         
         
 
@@ -226,7 +227,7 @@ Module.register("MMM-WunderGround", {
 
 
             var windIcon = document.createElement("td");
-            if (this.config.windunits == "mph") {
+            if (this.config.windunits == "kph") {
                 windIcon.innerHTML = this.windSpeedKph + "<sub>Kph</sub>";
             } else {
                 windIcon.className = "wi " + this.windSpeed;
