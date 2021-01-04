@@ -31,7 +31,8 @@ modules: [
 	roundTmpDecs: 1,
 	UseCardinals: 0,
 	layout: "horizontal",
-	sysstat: 0
+	sysstat: 0,
+	windunits: "kph",
     }
 },
 ]
