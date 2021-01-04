@@ -33,6 +33,8 @@ modules: [
 	layout: "horizontal",
 	sysstat: 0,
 	windunits: "kph",
+	lat: "-34.50",
+	lon: "150.10",
     }
 },
 ]
